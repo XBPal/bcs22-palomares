@@ -25,26 +25,17 @@ class Stack:
         if self.top is None:
             print("Stack is empty")
         elif self.top.next is None:
-            print(f"Popped Element is : {self.top.data}")
-            print("=====================================")
+            popped = self.top.data
             self.top = None
+            return popped
         else:
             temp = self.top
-            print(f"Popped Element is : {self.top.data}")
-            print("=====================================")
+            popped = temp.data
             self.top = temp.next
             temp = None
+            return popped
 
-    def getlist(self):
-        if self.top is None:
-            print("Stack is Empty")
-        else:
-            reversedList = []
-            temp = self.top
-            while temp:
-                reversedList.append(temp.data)
-                temp = temp.next
-            return reversedList
+
 
 # Palindrome checker function
 def palindrome(palinInput):
@@ -54,15 +45,19 @@ def palindrome(palinInput):
     check = palinInput.lower()
     checklist = []
     reverseStack = Stack()
+    checkletter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j','k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     for character in check:
-        if character.isalpha():
+        if character in checkletter:
             checklist.append(character)
             reverseStack.push(character)
 
-    reverseList = reverseStack.getlist()
-    correct = "".join(checklist)
-    reverse = "".join(reverseList)
+    reverseList = []
+    for character in range(len(checklist)):
+        popped = reverseStack.pop()
+        reverseList.append(popped)
+        correct = "".join(checklist)
+        reverse = "".join(reverseList)
 
     print("Palindrome Checker")
     print("========================")
