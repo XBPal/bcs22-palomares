@@ -1,24 +1,4 @@
-'''
-	FIFO - insert() and pop()
-
-	Operations of Queue
-		a. enqueue() 	- to insert
-			Steps:
-				1. Check if the queue is full or not
-					1.1. If full, print "Overflow" and end the operation.
-					1.2. If not full, proceed to Step 2.
-				2. Increment the tail.
-				3. Add the element.
-		b. dequeue() 	- to remove
-		c. front()
-		d. rear()		- to check
-		e. isEmpty()	- to know if queue is empty or not
-		f. isFull()		- to know if queue is full or not
-		g. size()		- capacity of the queue
-'''
-
-
-class Queue:
+class Parking:
     def __init__(self, capacity):
         self.front = self.size = 0
         self.rear = capacity - 1
@@ -33,27 +13,27 @@ class Queue:
 
     def enqueue(self, item):
         if self.isFull():
-            print("The list is full or overflow.")
+            print("The parking is full or overflow.")
             return
         self.rear = (self.rear + 1) % (self.capacity)
         self.QList[self.rear] = item
         self.size = self.size + 1
-        print("'%s' added to list." % str(item))
+        print("'%s' parked." % str(item))
 
     def queueFront(self):
         if self.isEmpty():
-            print("Queue is empty.")
-        print("Front item: ", self.QList[self.front])
+            print("Parking is empty.")
+        print("First parked: ", self.QList[self.front])
 
     def queueRear(self):
         if self.isEmpty():
-            print("Queue is empty.")
-        print("Rear item: ", self.QList[self.rear])
+            print("Parking is empty.")
+        print("Last parked: ", self.QList[self.rear])
 
     def dequeue(self):
         # If Queue is empty, print a status message and skip the succeeding code
         if self.isEmpty():
-            print("Queue is empty.")
+            print("Parking is empty.")
             return
         # Store the original element in the front in a temporary variable named "dequeued".
         dequeued = self.QList[self.front]
@@ -69,14 +49,16 @@ class Queue:
 
 
 if __name__ == '__main__':
-    queue = Queue(5)
+    queue = Parking(5)
 
     while True:
         option = input("Add or Remove vehicle? [add/remove/done]: ")
         print("~~~~~~~~~~~~~~~~~~~~~")
         if option.lower() == "add":
             y = input("Add plate number: ")
+            time = input("Add time of arrival: ")
             queue.enqueue(y)
+            print(f"Arrived at {time}" )
             print("===============")
             queue.queueFront()
             queue.queueRear()
